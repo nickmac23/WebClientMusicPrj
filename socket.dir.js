@@ -18,16 +18,24 @@
       let vm = this
       vm.socketRoom = false
       vm.setRoom = setRoom;
+      vm.sendSong = sendSong;
 
       function setRoom (data) {
         socketRoom = data
-        socket.emit('server', {to: 'electron', room: socketRoom, info: 'from client'})
+        socket.emit('server', {to: 'electron', room: socketRoom, info: 'client wants data!'})
         socket.on(socketRoom + 'client', function (data) {
-          console.log(data);
-          vm.socketRoom = true
-          vm.list = data;
-          $scope.$apply()
+          if (Array.isArray(data)) {
+            vm.socketRoom = true
+            vm.list = data;
+            $scope.$apply()
+          } else {
+            console.log(data);
+          }
         })
+      }
+
+      function sendSong(path) {
+        socket.emit('server', {to: 'electron', room: socketRoom, info: path})
       }
     }
   }
