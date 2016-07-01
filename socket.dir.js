@@ -32,6 +32,7 @@
             break;
           case 32:
             obj.command = 'space'
+            e.preventDefault();
             break;
         }
         obj.from = 'socket'
@@ -48,15 +49,13 @@
             $scope.$apply()
           } else {
             vm.state = data
-            // console.log(vm.state.search.length === 1);
-            // if (vm.state.search.length === 1) vm.state.search = "*"
             $scope.$apply();
           }
         })
       }
 
       function sendSong(path) {
-        // path.fill = !!path.fill ? path.fill : '';
+        if (path.command === 'search' && path.fill === '') path.fill = false
         socket.emit('server', {to: 'electron', room: socketRoom, info: path})
       }
     }
