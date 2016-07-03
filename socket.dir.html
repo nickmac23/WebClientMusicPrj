@@ -11,7 +11,7 @@
         <span>{{vm.state.music.album}}</span><span ng-repeat='artist in vm.state.music.artist'>{{artist}}</span>
         <br>
         <br>
-
+        <label for="">Volume <input type="range" id="myRange" value="100"  max='100' ng-change="vm.sendSong({command: 'volume', val: vm.state.vol/100, from: 'socket'})" ng-model='vm.state.vol'></label>
       </div>
 
       <div class='media-body list'>
@@ -57,6 +57,9 @@
 
 </main>
 <style>
+#myRange{
+  /*width: 40%;*/
+}
   #content{
     padding: 20px;
     height: 100%;
