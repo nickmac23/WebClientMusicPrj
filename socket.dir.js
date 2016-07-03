@@ -21,7 +21,7 @@
       vm.sendSong = sendSong;
       vm.state = {};
       vm.state.image = "./img/tree.jpg"
-      vm.state.vol = 100
+      vm.vol = 100
       vm.volume = volume;
 
       function volume (){

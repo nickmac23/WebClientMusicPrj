@@ -11,7 +11,11 @@
         <span>{{vm.state.music.album}}</span><span ng-repeat='artist in vm.state.music.artist'>{{artist}}</span>
         <br>
         <br>
-        <label for="">Volume <input type="range" id="myRange" value="100"  max='100' ng-change="vm.sendSong({command: 'volume', val: vm.state.vol/100, from: 'socket'})" ng-model='vm.state.vol'></label>
+        <label for="">Volume <input type="range" id="myRange" value="100"  max='100' ng-change="vm.sendSong({command: 'volume', val: vm.vol/100, from: 'socket'})" ng-model='vm.vol'></label>
+        <div class="arrows">
+          <span class="glyphicon glyphicon-backward" aria-hidden="true" ng-click='vm.sendSong({command: "back"})'></span>
+          <span class="glyphicon glyphicon-forward" aria-hidden="true" ng-click='vm.sendSong({command: "next"})'></span>
+        </div>
       </div>
 
       <div class='media-body list'>
@@ -57,9 +61,7 @@
 
 </main>
 <style>
-#myRange{
-  /*width: 40%;*/
-}
+
   #content{
     padding: 20px;
     height: 100%;
@@ -105,8 +107,8 @@
     margin-top: 20px;
   }
   #small{
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
   }
   .focus{
     color: rgb(249, 217, 2);
