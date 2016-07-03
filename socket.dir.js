@@ -20,6 +20,7 @@
       vm.setRoom = setRoom;
       vm.sendSong = sendSong;
       vm.state = {};
+      vm.state.image = "./img/tree.jpg"
 
       document.addEventListener('keydown', function (e){
         var obj = {};
