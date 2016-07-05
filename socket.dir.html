@@ -17,8 +17,8 @@
           <span class="glyphicon glyphicon-forward" aria-hidden="true" ng-click='vm.sendSong({command: "next"})'></span>
         </div>
       </div>
-
-      <div class='media-body list'>
+      <div class='media-right list'>
+        <h6 ><a href="http://nickpmacintyre.firebaseapp.com">By Nick MacIntyre</a></h6>
         <form class="inputs" ng-submit='vm.setRoom(vm.room)' ng-hide='vm.socketRoom' >
             <div class="input-group">
               <input type="text" class="form-control inputs" ng-model='vm.room' name='socketRoom'>
@@ -43,6 +43,12 @@
   </header>
 
   <div id='content'>
+    <div class="jumbotron" ng-hide='vm.list.length > 0'>
+      <h1>Welcome to the Gforce music project!</h1>
+      <ul>To get started you will need the Gforce desktop music player and mobile remote.</ul>
+      <ul>To see your music set channels on all platform equal to the same name</ul>
+      <a href="http://github.com/nickmac23/WebClientMusicPrj">Visit on GitHub</a>
+    </div>
 
   <table  ng-show='vm.list.length > 0'>
     <tbody ng-repeat='music in vm.list | orderBy: vm.state.order | filter: vm.state.search as filtered' >
@@ -61,7 +67,17 @@
 
 </main>
 <style>
-
+  .jumbotron{
+    padding: 20px;
+    color: black;
+  }
+  .jumbotron ul{
+    font-size: 20px;
+  }
+  .jumbotron a{
+    float: right;
+    color: red;
+  }
   #content{
     padding: 20px;
     height: 100%;
@@ -86,6 +102,10 @@
   }
   .list h5{
     float: right;
+  }
+  .media-right{
+    width: 20%;
+    text-align: right;
   }
   #background{
     position: fixed;
