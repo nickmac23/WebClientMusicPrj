@@ -13,8 +13,10 @@
         <br>
         <label for="">Volume <input type="range" id="myRange" value="100"  max='100' ng-change="vm.sendSong({command: 'volume', val: vm.vol/100, from: 'socket'})" ng-model='vm.vol'></label>
         <div class="arrows">
-          <span class="glyphicon glyphicon-backward" aria-hidden="true" ng-click='vm.sendSong({command: "back"})'></span>
-          <span class="glyphicon glyphicon-forward" aria-hidden="true" ng-click='vm.sendSong({command: "next"})'></span>
+          <span class="glyphicon glyphicon-backward hoveron" aria-hidden="true" ng-click='vm.sendSong({command: "back"})'></span>
+          <span class="glyphicon glyphicon-play hoveron" aria-hidden="true" ng-if='vm.state.command==="pause"' ng-click='vm.sendSong({command: "space"})'></span>
+          <span class="glyphicon glyphicon-pause hoveron" aria-hidden="true" ng-if='vm.state.command==="playing"' ng-click='vm.sendSong({command: "space"})'></span>
+          <span class="glyphicon glyphicon-forward hoveron" aria-hidden="true" ng-click='vm.sendSong({command: "next"})'></span>
         </div>
       </div>
       <div class='media-right list'>
@@ -33,10 +35,10 @@
 
 
       <h5>
-        <span ng-click='vm.sendSong({command: "state", order: "title", from:"socket"})' ng-class='{"focus": vm.state.order === "title"}'>Title</span>
-        <span ng-click='vm.sendSong({command: "state", order: "album", from:"socket"})' ng-class='{"focus": vm.state.order === "album"}'>Album</span>
-        <span ng-click='vm.sendSong({command: "state", order: "artist", from:"socket"})' ng-class='{"focus": vm.state.order === "artist"}'>Artist</span>
-        <span ng-click='vm.sendSong({command: "state", order: "genre", from:"socket"})' ng-class='{"focus": vm.state.order === "genre"}'>Genre</span>
+        <span class='hoveron' ng-click='vm.sendSong({command: "state", order: "title", from:"socket"})' ng-class='{"focus": vm.state.order === "title"}'>Title</span>
+        <span class='hoveron' ng-click='vm.sendSong({command: "state", order: "album", from:"socket"})' ng-class='{"focus": vm.state.order === "album"}'>Album</span>
+        <span class='hoveron' ng-click='vm.sendSong({command: "state", order: "artist", from:"socket"})' ng-class='{"focus": vm.state.order === "artist"}'>Artist</span>
+        <span class='hoveron' ng-click='vm.sendSong({command: "state", order: "genre", from:"socket"})' ng-class='{"focus": vm.state.order === "genre"}'>Genre</span>
       </h5>
       </div>
       </div>
@@ -44,9 +46,9 @@
 
   <div id='content'>
     <div class="jumbotron" ng-hide='vm.list.length > 0'>
-      <h1>Welcome to the Nick Mac's music project!</h1>
-      <ul>To get started you will need the <a href="https://github.com/nickmac23/musicPrj">desktop music player</a> and mobile remote.</ul>
-      <ul>To see your music set channels on all platform equal to the same name</ul>
+      <h1>Welcome to Nick Mac's music project!</h1>
+      <ul>To get started you will need the <a href="https://drive.google.com/drive/folders/0B_lmN_Thucexc0owenhSQ3JTSkU">desktop music player</a> and <a href="https://github.com/nickmac23/ioncMusicPrj">mobile remote.</a></ul>
+      <ul>To see your music set channels on all platforms equal to the same name.</ul>
       <a class='git' href="http://github.com/nickmac23/WebClientMusicPrj">Visit on GitHub</a>
     </div>
 
@@ -55,9 +57,10 @@
       <div id='nick' value='{{filtered.length}}'></div>
       <tr ng-click="vm.sendSong({command:'play',path:music.path,index:music.index,pageIndex:$index,from:'socket'})"
       id={{$index}} path={{music.path}} index={{music.index}}
+      class='hoveron'
       ng-class='{"playing": vm.state.music.index === music.index}'>
         <td>{{music.title}}</td>
-        <td>{{music.album}}</td>
+        <td class='first'>{{music.album}}</td>
         <td class='last' ng-repeat='artist in music.artist'>{{artist}}</td>
         <td class='last' ng-repeat='genre in music.genre'>{{genre}}</td>
       </tr>
@@ -121,7 +124,7 @@
     background-color: black;
     opacity: 0.8;
     color: white;
-    font-family:  Comfortaa;
+    font-family: Comfortaa;
   }
   .container{
     margin-top: 20px;
@@ -149,9 +152,25 @@
   }
   table{
     width: 100%;
+    table-layout:fixed;
+
   }
   .last{
-    padding-right: 5px;
+    padding-right: 10px;
     text-align: right;
+  }
+  .first{
+    padding-left: 10px;
+  }
+  td{
+    padding-top: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 25%;
+    text-overflow: ellipsis;
+  }
+  .hoveron:hover{
+    opacity: 0.5;
+    cursor: pointer;
   }
 </style>

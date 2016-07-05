@@ -22,11 +22,7 @@
       vm.state = {};
       vm.state.image = "./img/tree.jpg"
       vm.vol = 100
-      vm.volume = volume;
 
-      function volume (){
-        console.log(vm.vol);
-      }
 
       document.addEventListener('keydown', function (e){
         var obj = {};
