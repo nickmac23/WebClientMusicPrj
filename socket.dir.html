@@ -25,7 +25,7 @@
             <div class="input-group">
               <input type="text" class="form-control inputs" ng-model='vm.room' name='socketRoom'>
               <span class="input-group-btn">
-                <button class="btn btn-default" type="submit">Set channle</button>
+                <button class="btn btn-default" type="submit">Set channel</button>
               </span>
             </div>
         </form>
@@ -45,16 +45,15 @@
   </header>
 
   <div id='content'>
-    <div class="jumbotron" ng-hide='vm.list.length > 0'>
-      <h1>Welcome to Nick Mac's music project!</h1>
+    <div class="jumbotron" ng-hide='vm.state.list.length > 0'>
+      <h1>Welcome to the music project!</h1>
       <ul>To get started you will need to download the <a href="https://drive.google.com/drive/folders/0B_lmN_Thucexc0owenhSQ3JTSkU">desktop music player zip</a> and <a href="https://github.com/nickmac23/ioncMusicPrj">mobile remote.</a></ul>
       <ul>To see your music set channels on all platforms equal to the same name.</ul>
       <a class='git' href="http://github.com/nickmac23/WebClientMusicPrj">Visit on GitHub</a>
     </div>
 
-  <table  ng-show='vm.list.length > 0'>
-    <tbody ng-repeat='music in vm.list | orderBy: vm.state.order | filter: vm.state.search as filtered' >
-      <div id='nick' value='{{filtered.length}}'></div>
+  <table  ng-show='vm.state.list.length > 0'>
+    <tbody ng-repeat='music in vm.state.list' >
       <tr ng-click="vm.sendSong({command:'play',path:music.path,index:music.index,pageIndex:$index,from:'socket'})"
       id={{$index}} path={{music.path}} index={{music.index}}
       class='hoveron'

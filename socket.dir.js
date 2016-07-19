@@ -46,14 +46,10 @@
         socketRoom = data
         socket.emit('server', {to: 'electron', room: socketRoom, info: 'client wants data!'})
         socket.on(socketRoom + 'client', function (data) {
-          if (Array.isArray(data)) {
-            vm.socketRoom = true
-            vm.list = data;
-            $scope.$apply()
-          } else {
-            vm.state = data
-            $scope.$apply();
-          }
+          vm.socketRoom = true
+          vm.state = data
+          console.log(vm.state.list);
+          $scope.$apply();
         })
       }
 
